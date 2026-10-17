@@ -19,7 +19,7 @@ This repository is a **field kit**: the plugins, skills and MCP servers I carry 
 | | Claude Code | Codex |
 |---|---|---|
 | CLI | `2.1.198` | `codex-cli 0.153.4` |
-| Provider / Model | Z.ai GLM: `glm-5.3-flash`, effort `max` | `gpt-6.1-sol`, reasoning `medium` · `gpt-6-lunamax` |
+| Provider / Model | Z.ai GLM: `glm-5.3-flash`, effort `max` | `gpt-6.1-sol`, reasoning `medium` · `gpt-6-luna`, reasoning `max` |
 | Main config | `~/.claude/settings.json`, `~/.claude.json`, `~/.claude/rules/` | `~/.codex/config.toml`, `~/.codex/AGENTS.md` |
 
 Check current state:
