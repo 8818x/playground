@@ -27,7 +27,7 @@ description: Diagnose Windows PC problems including crashes, slow performance, n
 
 ## Evidence collection (read-only first)
 
-| ข้อมูล | คำสั่ง |
+| Data | Command |
 |---|---|
 | System info | `Get-ComputerInfo` |
 | Processes | `Get-Process` |
@@ -36,9 +36,9 @@ description: Diagnose Windows PC problems including crashes, slow performance, n
 | Event errors | `Get-WinEvent -FilterHashtable @{LogName='System';Level=2,3} -MaxEvents 50` |
 | DNS | `Resolve-DnsName <host>` |
 
-Tool layer เพิ่มเติม (เมื่อต้องการเจาะลึก): Sysinternals — Process Explorer (process/handles/DLL), Process Monitor (file/registry activity), Autoruns (startup/persistence), TCPView (connections), RAMMap (memory), ProcDump (crash/hang dumps) และ Microsoft TSS สำหรับเก็บ diagnostics ครบชุด
+Deeper tool layer (when the case needs it): Sysinternals — Process Explorer (process/handles/DLL), Process Monitor (file/registry activity), Autoruns (startup/persistence), TCPView (connections), RAMMap (memory), ProcDump (crash/hang dumps), and Microsoft TSS for a full diagnostics bundle
 
-## โครงผลลัพธ์ที่ต้องรายงาน
+## Required report structure
 
 ```
 SYMPTOM
