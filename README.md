@@ -4,83 +4,88 @@
 
 # Toolkit(ten)s
 
-*A portable field kit for coding agents — Claude Code and Codex on one shared setup*
+*A practical field kit for Claude Code and Codex on Windows*
 
-[Overview](#overview) • [Memory](#memory) • [Docs](#docs) • [Workflow](#workflow) • [Gotchas](#gotchas)
+[Get started](#get-started) · [Debug kit](#debug-kit) · [Documentation](#documentation)
 
 </div>
 
-Toolkit(ten)s documents one machine's agent setup as a kit you can carry: plugins, skills and MCP servers wired identically into **Claude Code** and **Codex** (driven through Zed), so work swaps agents without re-learning anything.
+Toolkit(ten)s keeps troubleshooting skills and notes about one working agent
+setup in a small repository. Use the skills to investigate software bugs and
+Linux or Windows incidents; use the guides to understand the surrounding
+plugins, MCP tools and memory workflow.
 
 > [!NOTE]
-> A snapshot of a real machine — not an installer or dotfiles.  
-> Last reviewed: **2026-10-17**
+> This is a field kit and a machine-specific setup record, not an installer.
+> Cloning it does not install plugins, configure credentials or start services.
+> Documentation reviewed **2026-10-21**.
 
-## Overview
+## Get started
 
-| | Claude Code | Codex |
-|---|---|---|
-| CLI | `2.1.198` | `codex-cli 0.153.4` |
-| Provider / Model | Z.ai GLM: `glm-5.3-flash`, effort `max` | `gpt-6.1-sol`, reasoning `medium` · `gpt-6-luna`, reasoning `max` |
-| Main config | `~/.claude/settings.json`, `~/.claude.json`, `~/.claude/rules/` | `~/.codex/config.toml`, `~/.codex/AGENTS.md` |
+1. Open this repository in your terminal or editor.
+2. Read [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) and choose the skill matching
+   the incident. Each skill is self-contained.
+3. Give the agent the symptom, affected target, evidence and allowed actions.
+   Start with diagnosis when the cause is unknown.
 
-**What rides in the kit**
+For example:
 
-- **6 plugins** — [caveman][cav] (terse mode + focused fix workflows), [ponytail][pony] (shortest working path), [mattpocock-skills][mp] (grilling, TDD, review, planning), [claude-mem][cmem] (persistent memory shared across both agents), [andrej-karpathy-skills][karp] (standing style guard), [impeccable][impecc] (design expertise + AI-slop detector)
-- **4 standalone skills** — [create-readme][gh], [find-skills][npxskills], [task-observer][tso] and [karpathy-guidelines][karp] (Codex's copy) via the `skills` CLI, one store shared by every agent
-- **6 MCP servers** — [codebase-memory-mcp][cbm] (code graph), [context7][c7] (version-matched docs), [firecrawl][fc] (web research), [playwright][pw] (browser control), `web_reader` (light single-page read, Claude only), `mcp-search` (memory recall via claude-mem)
-- **1 debug kit** — troubleshooting skills this repo carries in `.claude/skills/`
+```text
+Read .claude/skills/windows-troubleshooting/SKILL.md and use it to investigate
+this PC's intermittent application crashes. Collect read-only evidence first.
+```
 
-> [!WARNING]
-> **ECC left the kit.** The [ECC][ecc] full harness (~280 skills, ~88 agents, gated pipelines) overflowed the skills budget when stacked and its always-on hooks taxed every session — removed from both agents. The lesson is recorded in [AGENT-SETUP.md](AGENT-SETUP.md#plugins).
+Claude Code discovers the project skills in `.claude/skills/`. For Codex,
+explicitly ask it to read the relevant file; this checkout does not include a
+project `.agents/skills/` discovery directory. See the
+[scope notes](docs/SYSTEM-DEBUG-KIT.md#using-the-skills) before installing copies
+elsewhere.
 
-## Memory
+## Debug kit
 
-Two layers added on 2026-10-17:
-
-- **Recall** — [claude-mem][cmem] captures both agents' sessions into one shared store (`~/.claude-mem`), compresses them into observations, and injects relevant context at session start. Claude remembers what Codex did, and vice versa.
-- **Improvement** — [task-observer][tso] watches sessions for corrections and repeated work, then proposes skill updates in `skill-updates/` for human review. Nothing changes until approved.
-
-## Docs
-
-| File | Contents |
+| Skill | Use it for |
 |---|---|
-| [AGENT-SETUP.md](AGENT-SETUP.md) | The full kit: plugins, skills, MCP servers, memory layers, config files, gotchas |
-| [SYSTEM-DEBUG-KIT.md](SYSTEM-DEBUG-KIT.md) | The repo-carried troubleshooting skills (systematic debugging, Linux/Windows triage) |
+| [systematic-debugging](.claude/skills/systematic-debugging/SKILL.md) | Bugs, failing tests, intermittent behavior and failures across component boundaries |
+| [linux-troubleshooting](.claude/skills/linux-troubleshooting/SKILL.md) | Linux resource pressure, failed services, HTTP errors, SSH, networking and deployments |
+| [windows-troubleshooting](.claude/skills/windows-troubleshooting/SKILL.md) | Windows crashes, slowness, storage, services, drivers, updates and connectivity |
 
-## Workflow
+All three are written for this project. Their common workflow is to preserve
+evidence, test a specific hypothesis, make one justified change within existing
+authority, and repeat the original failing check. Each includes scenario prompts
+under `evals/evals.json` for reviewing its behavior.
 
-The short version — full lanes and pipelines in [AGENT-SETUP.md](AGENT-SETUP.md#workflow):
+## Documentation
 
+| Guide | Contents |
+|---|---|
+| [Agent Setup](docs/AGENT-SETUP.md) | Verified CLI/plugin snapshot, standalone skills, MCP roles, memory, workflow and Windows caveats |
+| [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) | Skill selection, scope, examples, layout and validation limits |
+
+```text
+toolkittens/
+├── README.md
+├── docs/
+│   ├── AGENT-SETUP.md
+│   └── SYSTEM-DEBUG-KIT.md
+├── .claude/skills/
+│   ├── systematic-debugging/
+│   ├── linux-troubleshooting/
+│   └── windows-troubleshooting/
+└── assets/toolkittens-logo.png
 ```
-1. Pick a lane      grilling · prototype · research · tdd
-2. Pick a pipeline  investigate-first → surgical-patch · safe-refactor · lean-build · migration
-3. While working    codebase-memory before grep · context7 before APIs · firecrawl for web facts
-4. Before shipping  code-review → simplify → ponytail-review → security-review → verify-and-stop
-5. End of session   handoff (→ Codex) · claude-mem already captured · task-observer log
-```
 
-## Gotchas
+## Working habits
 
-The machine-specific traps (MCP process leaks, skills budget, claude-mem background worker, task-observer activation, Windows path quirks) live in [AGENT-SETUP.md](AGENT-SETUP.md#gotchas).
+- Use the code graph for symbols and callers, Context7 for version-sensitive
+  APIs, and primary sources for external facts.
+- Use `skill-creator` for skill authoring and `create-readme` for project docs.
+  These are user-installed tools described in the setup guide.
+- Keep recall and improvement separate: `claude-mem` provides session memory;
+  `task-observer` records opportunities to improve skills.
+- Review and verify the exact changes before committing. A simulated skill
+  response does not establish that an incident was fixed on a real machine.
 
 > [!CAUTION]
-> Config files referenced by this kit contain plaintext API keys. Never share `~/.claude.json` or `~/.codex/config.toml`.
-
-## Link definitions
-
-<!-- reference-style link definitions -->
-[cav]: https://github.com/JuliusBrussee/caveman
-[mp]: https://github.com/mattpocock/skills
-[pony]: https://github.com/DietrichGebert/ponytail
-[ecc]: https://github.com/affaan-m/ECC
-[cmem]: https://github.com/thedotmack/claude-mem
-[tso]: https://github.com/rebelytics/one-skill-to-rule-them-all
-[impecc]: https://impeccable.style
-[gh]: https://github.com/github/awesome-copilot
-[karp]: https://github.com/multica-ai/andrej-karpathy-skills
-[npxskills]: https://github.com/vercel-labs/skills
-[cbm]: https://github.com/DeusData/codebase-memory-mcp
-[c7]: https://github.com/upstash/context7
-[fc]: https://github.com/firecrawl/firecrawl-mcp
-[pw]: https://github.com/microsoft/playwright-mcp
+> Agent configs, diagnostic logs and memory stores can contain secrets or
+> personal data. Review and redact them before sharing; keep credentials out
+> of this repository.
