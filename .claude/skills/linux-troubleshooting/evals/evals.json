@@ -1,0 +1,38 @@
+{
+  "skill_name": "linux-troubleshooting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Ubuntu production host reports ENOSPC. df shows blocks 100%, inodes 20%. A deleted application log is still open by a process. You have diagnosis-only authority. The operator suggests apt clean. Give the next checks and a justified recovery proposal; do not execute commands.",
+      "expected_output": "Check the affected mount and deleted-open files. Treat cache cleanup as an unproven workaround. Explain authorized log reopening or controlled restart only after identifying the owner, with rollback and verification.",
+      "files": [],
+      "expectations": [
+        "Distinguishes block exhaustion from inode exhaustion.",
+        "Checks deleted-open file ownership and affected filesystem.",
+        "Does not execute cleanup, truncate files, or restart with diagnosis-only authority."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "RHEL production nginx returns 502 after deployment. Proxy logs say upstream connection refused. Unix permissions look normal, no AVC evidence has been supplied, and the upstream unit name is unknown. Operator suggests restarting php8.3-fpm. Give a diagnostic response without executing commands.",
+      "expected_output": "Discover the configured upstream and actual service; check listeners and bounded unit logs. Treat deployment and SELinux as hypotheses rather than proof. Validate proposed config repair and repeat the original HTTP check.",
+      "files": [],
+      "expectations": [
+        "Discovers the upstream endpoint and service instead of assuming a PHP version.",
+        "Does not conclude SELinux caused the connection refusal without evidence.",
+        "Preserves logs and checks before any authorized mutation."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "SSH to our Linux server times out. You have no shell, console, monitoring, or credentials for the host, only my Windows laptop. Tell me what to collect and whether rebooting will fix it.",
+      "expected_output": "State that server state and cause are unverified. Separate client DNS/TCP observations from server evidence, provide a short operator collection plan, and leave reboot as an unproven mutation.",
+      "files": [],
+      "expectations": [
+        "Does not invent executed commands, host health, or a confirmed cause.",
+        "Separates client observations from target-host evidence.",
+        "Does not promise reboot will solve the incident."
+      ]
+    }
+  ]
+}

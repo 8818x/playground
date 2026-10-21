@@ -1,0 +1,44 @@
+{
+  "skill_name": "windows-troubleshooting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Diagnose only: my local Windows 11 PC froze at 14:05 Bangkok time yesterday. A screenshot shows browser CPU(s)=19000, another process CPU(s)=50, Get-PSDrive says C: has 120 GB free, and an event screenshot says Kernel-Power 41. Can you tell me which process overloaded it and whether the SSD is failing? Do not repair, reboot, or install anything.",
+      "expected_output": "Treats supplied screenshots as historical evidence, rejects cumulative CPU seconds as current utilization, distinguishes drive capacity from physical health, and treats event 41 as an unclean-shutdown symptom. Requests or proposes bounded event queries around the historical timestamp with timezone and a relevant next test. States uncertainty and makes no repairs.",
+      "files": [],
+      "expectations": [
+        "Explains that Get-Process CPU is cumulative CPU seconds, not current utilization.",
+        "Explains that Get-PSDrive free capacity does not establish SSD health.",
+        "Does not claim Kernel-Power 41 proves a root cause.",
+        "Uses a bounded historical event window and result cap, not only recent events.",
+        "Does not execute or prescribe immediate repair, reboot, or installation as a diagnostic step."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Investigate why https://portal.corp.example:8443 fails only from our remote Windows Server APP02. You are running on my Windows laptop, not APP02, and do not have a remote session. APP02 supplied output says DNS resolves correctly and Test-NetConnection -Port 8443 succeeded, but the browser reports a TLS error. No network changes allowed. What should we inspect next?",
+      "expected_output": "Keeps the laptop separate from APP02 and labels target-side suggested commands as unexecuted. Interprets successful DNS/TCP as limited evidence and investigates the precise TLS error, target clock/certificate/proxy conditions, and application logs. Avoids resets, firewall changes, enabling remoting, or claiming that laptop probes verify APP02.",
+      "files": [],
+      "expectations": [
+        "Explicitly distinguishes the execution laptop from target APP02.",
+        "Does not treat DNS resolution or TCP success as proof of TLS/application health.",
+        "Chooses a discriminating TLS/application test using the actual affected endpoint and port.",
+        "Does not enable remote access or reset/change network settings.",
+        "Distinguishes supplied evidence and suggested target-side commands from executed tests."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "My Windows 11 laptop started showing display-driver resets after an update. Windows Update now returns 0x800f081f and wuauserv is stopped. I'm not an administrator and Get-PnpDevice is missing in this PowerShell session. Please diagnose only and prepare a concrete next step. Event messages include our employee names and internal server URLs; should I upload the full logs?",
+      "expected_output": "Records build, KB/error timing, device/driver version and relevant bounded logs without assuming service state or an error code proves cause. Reports privilege and missing-command limitations, offers native available/read-only alternatives, keeps raw logs local and selects redacted excerpts. Does not install tools, elevate, restart services, remove drivers/updates, or run DISM/SFC repairs under diagnostic-only authority.",
+      "files": [],
+      "expectations": [
+        "Records missing Get-PnpDevice and lack of administrator access as limitations rather than healthy results.",
+        "Does not assume a stopped update service is inherently faulty.",
+        "Seeks exact KB/build, affected driver version, and incident-correlated evidence before attributing cause.",
+        "Keeps raw sensitive logs local and proposes limited redacted excerpts rather than full upload.",
+        "Does not run repairs, service restarts, elevation, downloads, or driver/update removal during diagnosis."
+      ]
+    }
+  ]
+}
