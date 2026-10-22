@@ -34,16 +34,31 @@ codex --version
 
 ### Plugins
 
-These plugin IDs were enabled in the local settings. Versions shown come from
-Claude's installed-plugin records; check each agent separately when updating.
+These entries were verified in the local plugin and skill inventories. Each
+agent has its own installation scope and may have a different version; check
+Claude's plugin list and Codex's plugin/skill catalog independently.
 
-| Plugin | Version | Observed scope | Purpose |
+| Package | Claude | Codex | Purpose |
 |---|---|---|---|
-| [caveman](https://github.com/JuliusBrussee/caveman) | `4.0.1` | Claude + Codex | Concise replies and focused investigation, patch, refactor and verification workflows |
-| [ponytail](https://github.com/DietrichGebert/ponytail) | `5.3.2` | Claude + Codex | Keep changes small while completing the requested task |
-| [mattpocock-skills](https://github.com/mattpocock/skills) | `1.3.1` | Claude + Codex | Design, research, diagnosis, TDD, review and writing for agents |
-| [claude-mem](https://github.com/thedotmack/claude-mem) | `13.41.0` | Claude + Codex | Persistent session recall; Codex uses the local `claude-mem-local` plugin source |
-| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | `1.0.0` | Claude plugin | Coding guidelines; Codex has a standalone skill copy |
+| [caveman](https://github.com/JuliusBrussee/caveman) | Plugin `4.0.1` | Plugin `4.0.1` | Concise replies and focused investigation, patch, refactor and verification workflows |
+| [ponytail](https://github.com/DietrichGebert/ponytail) | Plugin `5.3.2` | Plugin `5.3.2` | Keep changes small while completing the requested task |
+| [mattpocock-skills](https://github.com/mattpocock/skills) | Plugin `1.3.1` | Plugin `1.3.1` | Design, research, diagnosis, TDD, review and writing for agents |
+| [claude-mem](https://github.com/thedotmack/claude-mem) | Plugin `13.41.0` | Local plugin source `13.41.0` | Persistent session recall |
+| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Plugin `1.0.0` | Standalone skill copy | Coding guidelines |
+| [pstack](https://github.com/backnotprop/pstack) | Plugin `0.15.29` | 56 standalone skills via Skills CLI | Engineering workflow, planning, verification and agent coordination |
+| [Superpowers](https://github.com/obra/superpowers) | Plugin `6.1.1` | Plugin `6.4.2` | Brainstorming, planning, debugging, TDD, verification, review and skill authoring |
+
+Install Superpowers for Claude Code from the configured official marketplace,
+then verify it appears enabled:
+
+```powershell
+claude plugin install superpowers@claude-plugins-official
+claude plugin list
+```
+
+The versions differ between agents in this snapshot. Plugin bundles expose
+their own skills; a copy in one agent's plugin or skill directory does not
+install it for the other agent.
 
 `impeccable` is a standalone skill, not an enabled plugin in this snapshot.
 The project debug skills have no dependency on Superpowers.
