@@ -1,91 +1,71 @@
-<div align="center">
+# Playground
 
-<img src="assets/toolkittens-logo.png" alt="Toolkit(ten)s" width="220" />
+*Troubleshooting skills and setup notes for Claude Code and Codex on Windows.*
 
-# Toolkit(ten)s
+[Get started](#get-started) | [Troubleshooting skills](#troubleshooting-skills) | [Documentation](#documentation)
 
-*A practical field kit for Claude Code and Codex on Windows*
-
-[Get started](#get-started) · [Debug kit](#debug-kit) · [Documentation](#documentation)
-
-</div>
-
-Toolkit(ten)s keeps troubleshooting skills and notes about one working agent
-setup in a small repository. Use the skills to investigate software bugs and
-Linux or Windows incidents; use the guides to understand the surrounding
-plugins, MCP tools and memory workflow.
+Playground collects three project-local troubleshooting skills and notes about
+one working agent setup. Use the skills to investigate software bugs and Linux
+or Windows incidents, and the guides to understand the surrounding tools and
+workflow.
 
 > [!NOTE]
-> This is a field kit and a machine-specific setup record, not an installer.
-> Cloning it does not install plugins, configure credentials or start services.
-> Documentation reviewed **2026-10-21**.
+> This repository records a machine-specific setup; it is not an installer.
+> Cloning it does not install plugins, configure credentials, or start services.
 
 ## Get started
 
 1. Open this repository in your terminal or editor.
-2. Read [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) and choose the skill matching
-   the incident. Each skill is self-contained.
-3. Give the agent the symptom, affected target, evidence and allowed actions.
+2. Read the [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) and choose a skill for
+   the incident.
+3. Give the agent the symptom, affected target, evidence, and allowed actions.
    Start with diagnosis when the cause is unknown.
 
-For example:
+Claude Code discovers project skills in `.claude/skills/`. For Codex, ask it to
+read the relevant `SKILL.md` explicitly; this repository does not include a
+project `.agents/skills/` directory.
+
+Example request:
 
 ```text
-Read .claude/skills/windows-troubleshooting/SKILL.md and use it to investigate
-this PC's intermittent application crashes. Collect read-only evidence first.
+Read .claude/skills/windows-troubleshooting/SKILL.md and investigate this PC's
+intermittent application crashes. Collect read-only evidence first.
 ```
 
-Claude Code discovers the project skills in `.claude/skills/`. For Codex,
-explicitly ask it to read the relevant file; this checkout does not include a
-project `.agents/skills/` discovery directory. See the
-[scope notes](docs/SYSTEM-DEBUG-KIT.md#using-the-skills) before installing copies
-elsewhere.
-
-## Debug kit
+## Troubleshooting skills
 
 | Skill | Use it for |
 |---|---|
-| [systematic-debugging](.claude/skills/systematic-debugging/SKILL.md) | Bugs, failing tests, intermittent behavior and failures across component boundaries |
-| [linux-troubleshooting](.claude/skills/linux-troubleshooting/SKILL.md) | Linux resource pressure, failed services, HTTP errors, SSH, networking and deployments |
-| [windows-troubleshooting](.claude/skills/windows-troubleshooting/SKILL.md) | Windows crashes, slowness, storage, services, drivers, updates and connectivity |
+| [systematic-debugging](.claude/skills/systematic-debugging/SKILL.md) | Bugs, failing tests, integration errors, intermittent behavior, and performance regressions |
+| [linux-troubleshooting](.claude/skills/linux-troubleshooting/SKILL.md) | Linux resource pressure, services, HTTP, SSH, networking, and deployments |
+| [windows-troubleshooting](.claude/skills/windows-troubleshooting/SKILL.md) | Windows crashes, slowness, storage, services, drivers, updates, and connectivity |
 
-All three are written for this project. Their common workflow is to preserve
-evidence, test a specific hypothesis, make one justified change within existing
-authority, and repeat the original failing check. Each includes scenario prompts
-under `evals/evals.json` for reviewing its behavior.
+Each skill includes scenario prompts under `evals/evals.json` for reviewing its
+decisions. They are not an automatic test runner and do not authorize changes to
+a real machine.
 
 ## Documentation
 
 | Guide | Contents |
 |---|---|
-| [Agent Setup](docs/AGENT-SETUP.md) | Verified CLI/plugin snapshot, standalone skills, MCP roles, memory, workflow and Windows caveats |
-| [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) | Skill selection, scope, examples, layout and validation limits |
+| [Agent Setup](docs/AGENT-SETUP.md) | A verified snapshot of one workstation's tools, plugins, memory, and workflow |
+| [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) | Skill selection, scope, examples, repository layout, and validation limits |
+
+## Repository layout
 
 ```text
-toolkittens/
-├── README.md
-├── docs/
-│   ├── AGENT-SETUP.md
-│   └── SYSTEM-DEBUG-KIT.md
+playground/
 ├── .claude/skills/
 │   ├── systematic-debugging/
 │   ├── linux-troubleshooting/
 │   └── windows-troubleshooting/
-└── assets/toolkittens-logo.png
+├── docs/
+│   ├── AGENT-SETUP.md
+│   └── SYSTEM-DEBUG-KIT.md
+├── LICENSE
+└── README.md
 ```
 
-## Working habits
-
-- Use the code graph for symbols and callers, Context7 for version-sensitive
-  APIs, and primary sources for external facts.
-- Use `skill-creator` for skill authoring and `create-readme` for project docs.
-  These are user-installed tools described in the setup guide.
-- Keep recall and improvement separate: `claude-mem` provides session memory;
-  `task-observer` records opportunities to improve skills.
-- Review and verify the exact changes before committing. A simulated skill
-  response does not establish that an incident was fixed on a real machine.
-
 > [!CAUTION]
-> Agent configs, diagnostic logs and memory stores can contain secrets or
-> personal data. Review and redact them before sharing; keep credentials out
-> of this repository.
+> Setup notes and diagnostic artifacts can contain personal data. Review and
+> redact them before sharing, and keep credentials out of this repository.

@@ -2,7 +2,7 @@
 
 # Agent Setup
 
-*The workstation behind Toolkit(ten)s*
+*The workstation behind Playground*
 
 [Repository](../README.md) · [Debug kit](SYSTEM-DEBUG-KIT.md)
 
@@ -10,7 +10,7 @@
 
 This guide records a Windows setup used with Claude Code and Codex through a
 terminal or editor such as Zed. It separates repository files from user-installed
-tools. Reviewed **2026-10-21**; versions are a local snapshot, not requirements
+tools. Reviewed **2026-10-22**; versions are a local snapshot, not requirements
 or a promise that both agents expose identical capabilities.
 
 ## Overview
