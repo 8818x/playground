@@ -4,10 +4,10 @@
 
 [Get started](#get-started) | [Troubleshooting skills](#troubleshooting-skills) | [Documentation](#documentation)
 
-Playground collects three project-local troubleshooting skills and notes about
-one working agent setup. Use the skills to investigate software bugs and Linux
-or Windows incidents, and the guides to understand the surrounding tools and
-workflow.
+Playground collects three project-local troubleshooting skills, a portfolio and
+reverse-engineering skill suite, and notes about one working agent setup. Use
+the skills to investigate software bugs and Linux or Windows incidents, and the
+guides to understand the surrounding tools and workflow.
 
 > [!NOTE]
 > This repository records a machine-specific setup; it is not an installer.
@@ -21,9 +21,9 @@ workflow.
 3. Give the agent the symptom, affected target, evidence, and allowed actions.
    Start with diagnosis when the cause is unknown.
 
-Claude Code discovers project skills in `.claude/skills/`. For Codex, ask it to
-read the relevant `SKILL.md` explicitly; this repository does not include a
-project `.agents/skills/` directory.
+Claude Code discovers project skills in `.claude/skills/`; Codex discovers
+`.agents/skills/`. Both directories are checked in, so both agents read the
+same skill files in this checkout.
 
 Example request:
 
@@ -44,24 +44,40 @@ Each skill includes scenario prompts under `evals/evals.json` for reviewing its
 decisions. They are not an automatic test runner and do not authorize changes to
 a real machine.
 
+## Portfolio and reverse-engineering skills
+
+The `.agents/skills/` directory holds the canonical copies; `.claude/skills/`
+links to them with local Windows junctions (not committed).
+
+| Skill | Use it for |
+|---|---|
+| [jd-to-portfolio-tutor](.agents/skills/jd-to-portfolio-tutor/SKILL.md) | Learning a tool or stack from a job description by building a guided portfolio project |
+| [job-description-analyzer](.agents/skills/job-description-analyzer/SKILL.md) | Scoring a job posting, finding skill gaps, planning the application |
+| [portfolio-case-study-writer](.agents/skills/portfolio-case-study-writer/SKILL.md) | Turning resume bullets into detailed case studies |
+| [reverse-engineer-anything](.agents/skills/reverse-engineer-anything/SKILL.md) | Decompiling and explaining shipped software without source |
+
 ## Documentation
 
 | Guide | Contents |
 |---|---|
 | [Agent Setup](docs/AGENT-SETUP.md) | A verified snapshot of one workstation's tools, plugins, memory, and workflow |
 | [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) | Skill selection, scope, examples, repository layout, and validation limits |
+| [Skills Inventory](docs/SKILLS-INVENTORY.md) | Every installed user-scope skill for Claude and Codex, split by source |
+| [Plugin Skills Guide](docs/PLUGIN-SKILLS.md) | Plain-language description of every skill inside the seven installed plugins |
 
 ## Repository layout
 
 ```text
 playground/
+├── .agents/skills/          canonical portfolio/RE skill suite (Codex discovery)
 ├── .claude/skills/
-│   ├── systematic-debugging/
-│   ├── linux-troubleshooting/
-│   └── windows-troubleshooting/
+│   ├── systematic-debugging/  + linux- and windows-troubleshooting
+│   └── jd-to-portfolio-tutor  + three junctions into .agents/skills
 ├── docs/
 │   ├── AGENT-SETUP.md
-│   └── SYSTEM-DEBUG-KIT.md
+│   ├── SYSTEM-DEBUG-KIT.md
+│   ├── SKILLS-INVENTORY.md
+│   └── PLUGIN-SKILLS.md
 ├── LICENSE
 └── README.md
 ```

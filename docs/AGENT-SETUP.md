@@ -44,9 +44,9 @@ Claude's plugin list and Codex's plugin/skill catalog independently.
 | [ponytail](https://github.com/DietrichGebert/ponytail) | Plugin `5.3.2` | Plugin `5.3.2` | Keep changes small while completing the requested task |
 | [mattpocock-skills](https://github.com/mattpocock/skills) | Plugin `1.3.1` | Plugin `1.3.1` | Design, research, diagnosis, TDD, review and writing for agents |
 | [claude-mem](https://github.com/thedotmack/claude-mem) | Plugin `13.41.0` | Local plugin source `13.41.0` | Persistent session recall |
-| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Plugin `1.0.0` | Standalone skill copy | Coding guidelines |
-| [pstack](https://github.com/backnotprop/pstack) | Plugin `0.15.29` | 56 standalone skills via Skills CLI | Engineering workflow, planning, verification and agent coordination |
-| [Superpowers](https://github.com/obra/superpowers) | Plugin `6.1.1` | Plugin `6.4.2` | Brainstorming, planning, debugging, TDD, verification, review and skill authoring |
+| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Plugin `1.0.0` | Plugin `1.0.0` | Coding guidelines |
+| [pstack](https://github.com/backnotprop/pstack) | Plugin `0.15.29` | Plugin `0.15.32` | Engineering workflow, planning, verification and agent coordination |
+| [Superpowers](https://github.com/obra/superpowers) | Plugin `6.1.1` | Plugin `7.0.0` | Brainstorming, planning, debugging, TDD, verification, review and skill authoring |
 
 Install Superpowers for Claude Code from the configured official marketplace,
 then verify it appears enabled:
