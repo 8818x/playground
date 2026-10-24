@@ -20,7 +20,7 @@ or a promise that both agents expose identical capabilities.
 | CLI observed | `2.1.198` | `codex-cli 0.153.4` |
 | User configuration | `~/.claude/settings.json`, `~/.claude.json` | `~/.codex/config.toml` |
 | User instructions | `~/.claude/CLAUDE.md`, `~/.claude/rules/` | `~/.codex/AGENTS.md` |
-| Project debug skills | `.claude/skills/` | Read the same skill files explicitly in this checkout |
+| Project skills | `.agents/skills/` via `.claude/skills/` junctions | `.agents/skills/` |
 
 Model and provider choices belong to the active session/configuration. They are
 not pinned by this repository. Check the installed CLIs without printing config:
@@ -151,8 +151,8 @@ workflow that fully handles the request.
 
 ## Gotchas
 
-- **Project discovery differs.** Claude's project skills here live under
-  `.claude/skills/`; Codex documents `.agents/skills/` repository discovery.
+- **Project discovery now matches.** Both agents read `.agents/skills/` in
+  this checkout; `.claude/skills/` holds local junctions for Claude.
   See the [scope notes](SYSTEM-DEBUG-KIT.md#using-the-skills).
 - **Descriptions cost context.** Check duplicate skills and budget warnings
   before installing another large bundle.
@@ -169,7 +169,8 @@ workflow that fully handles the request.
 
 | Location | Purpose |
 |---|---|
-| `.claude/skills/` | Project troubleshooting skills and scenario prompts |
+| `.agents/skills/` | Canonical project skills: three troubleshooting, four portfolio/RE |
+| `.claude/skills/` | Windows junctions into `.agents/skills/` (local, gitignored) |
 | `docs/` | Setup and debugging guides |
 | `~/.agents/skills/` | Shared user skill store |
 | `~/.claude/skills/`, `~/.codex/skills/` | Additional user skill installations |

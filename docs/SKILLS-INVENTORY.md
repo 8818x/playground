@@ -68,10 +68,11 @@ Present in `~/.codex/plugins/cache/` with no `[plugins.*]` entry in `config.toml
 
 ## Project scope (Playground checkout)
 
-The portfolio / reverse-engineering suite lives in this repo at
-`.agents/skills/` (canonical, committed). `.claude/skills/` holds Windows
-junctions to it (gitignored, local convenience only); Codex discovers
-`.agents/skills/` natively, so it needs no link.
+The project skill suite lives in this repo at `.agents/skills/` (canonical,
+committed) — three troubleshooting skills plus four portfolio/RE skills.
+`.claude/skills/` holds Windows junctions to them (gitignored, local
+convenience only); Codex discovers `.agents/skills/` natively, so it needs
+no link.
 
 | Skill | In plain words |
 |---|---|

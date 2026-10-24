@@ -28,7 +28,7 @@ same skill files in this checkout.
 Example request:
 
 ```text
-Read .claude/skills/windows-troubleshooting/SKILL.md and investigate this PC's
+Read .agents/skills/windows-troubleshooting/SKILL.md and investigate this PC's
 intermittent application crashes. Collect read-only evidence first.
 ```
 
@@ -36,9 +36,9 @@ intermittent application crashes. Collect read-only evidence first.
 
 | Skill | Use it for |
 |---|---|
-| [systematic-debugging](.claude/skills/systematic-debugging/SKILL.md) | Bugs, failing tests, integration errors, intermittent behavior, and performance regressions |
-| [linux-troubleshooting](.claude/skills/linux-troubleshooting/SKILL.md) | Linux resource pressure, services, HTTP, SSH, networking, and deployments |
-| [windows-troubleshooting](.claude/skills/windows-troubleshooting/SKILL.md) | Windows crashes, slowness, storage, services, drivers, updates, and connectivity |
+| [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Bugs, failing tests, integration errors, intermittent behavior, and performance regressions |
+| [linux-troubleshooting](.agents/skills/linux-troubleshooting/SKILL.md) | Linux resource pressure, services, HTTP, SSH, networking, and deployments |
+| [windows-troubleshooting](.agents/skills/windows-troubleshooting/SKILL.md) | Windows crashes, slowness, storage, services, drivers, updates, and connectivity |
 
 Each skill includes scenario prompts under `evals/evals.json` for reviewing its
 decisions. They are not an automatic test runner and do not authorize changes to
@@ -46,8 +46,8 @@ a real machine.
 
 ## Portfolio and reverse-engineering skills
 
-The `.agents/skills/` directory holds the canonical copies; `.claude/skills/`
-links to them with local Windows junctions (not committed).
+All seven project skills live canonically in `.agents/skills/`; `.claude/skills/`
+holds local Windows junctions to them (not committed).
 
 | Skill | Use it for |
 |---|---|
@@ -69,10 +69,8 @@ links to them with local Windows junctions (not committed).
 
 ```text
 playground/
-├── .agents/skills/          canonical portfolio/RE skill suite (Codex discovery)
-├── .claude/skills/
-│   ├── systematic-debugging/  + linux- and windows-troubleshooting
-│   └── jd-to-portfolio-tutor  + three junctions into .agents/skills
+├── .agents/skills/          canonical project skills ×7 (Codex discovery)
+├── .claude/skills/          seven junctions into .agents/skills (local only)
 ├── docs/
 │   ├── AGENT-SETUP.md
 │   ├── SYSTEM-DEBUG-KIT.md
