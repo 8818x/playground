@@ -160,7 +160,7 @@ workflow that fully handles the request.
 
 | Location | Purpose |
 |---|---|
-| `.agents/skills/` | Canonical project skills: three troubleshooting, four portfolio/RE |
+| `.agents/skills/` | Canonical project skills: three troubleshooting, three portfolio |
 | `.claude/skills/` | Windows junctions into `.agents/skills/` (local, gitignored) |
 | `docs/` | Setup and debugging guides |
 | `~/.agents/skills/` | Shared user skill store |

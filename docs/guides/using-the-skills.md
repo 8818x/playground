@@ -33,10 +33,10 @@ none requires a global plugin or another skill to function.
 | [jd-to-portfolio-tutor](../../.agents/skills/jd-to-portfolio-tutor/SKILL.md) | Learning a tool or stack from a job description by building a guided portfolio project |
 | [job-description-analyzer](../../.agents/skills/job-description-analyzer/SKILL.md) | Scoring a job posting, finding skill gaps, planning the application |
 | [portfolio-case-study-writer](../../.agents/skills/portfolio-case-study-writer/SKILL.md) | Turning resume bullets into detailed portfolio case studies |
-| [reverse-engineer-anything](../../.agents/skills/reverse-engineer-anything/SKILL.md) | Decompiling and explaining shipped software without source |
 
-These four skills are self-contained guides; they do not touch the incident
-workflow above.
+These three skills are self-contained guides; they do not touch the incident
+workflow above. The REA CLI for reverse engineering ships globally on this
+workstation (`rea` on PATH), outside this repository.
 
 ## Brief the agent
 
