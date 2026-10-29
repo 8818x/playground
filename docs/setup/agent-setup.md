@@ -4,7 +4,7 @@
 
 *The workstation behind Playground*
 
-[Repository](../README.md) · [Debug kit](SYSTEM-DEBUG-KIT.md)
+[Repository](../../README.md) · [Using the skills](../guides/using-the-skills.md)
 
 </div>
 
@@ -20,7 +20,7 @@ or a promise that both agents expose identical capabilities.
 | CLI observed | `2.1.198` | `codex-cli 0.153.4` |
 | User configuration | `~/.claude/settings.json`, `~/.claude.json` | `~/.codex/config.toml` |
 | User instructions | `~/.claude/CLAUDE.md`, `~/.claude/rules/` | `~/.codex/AGENTS.md` |
-| Project debug skills | `.claude/skills/` | Read the same skill files explicitly in this checkout |
+| Project skills | `.agents/skills/` via `.claude/skills/` junctions | `.agents/skills/` |
 
 Model and provider choices belong to the active session/configuration. They are
 not pinned by this repository. Check the installed CLIs without printing config:
@@ -34,31 +34,26 @@ codex --version
 
 ### Plugins
 
-These entries were verified in the local plugin and skill inventories. Each
-agent has its own installation scope and may have a different version; check
+These packages are installed for both agents. Current versions and skill
+lists live in the [Skills inventory](../reference/skills-inventory.md); check
 Claude's plugin list and Codex's plugin/skill catalog independently.
 
-| Package | Claude | Codex | Purpose |
-|---|---|---|---|
-| [caveman](https://github.com/JuliusBrussee/caveman) | Plugin `4.0.1` | Plugin `4.0.1` | Concise replies and focused investigation, patch, refactor and verification workflows |
-| [ponytail](https://github.com/DietrichGebert/ponytail) | Plugin `5.3.2` | Plugin `5.3.2` | Keep changes small while completing the requested task |
-| [mattpocock-skills](https://github.com/mattpocock/skills) | Plugin `1.3.1` | Plugin `1.3.1` | Design, research, diagnosis, TDD, review and writing for agents |
-| [claude-mem](https://github.com/thedotmack/claude-mem) | Plugin `13.41.0` | Local plugin source `13.41.0` | Persistent session recall |
-| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Plugin `1.0.0` | Standalone skill copy | Coding guidelines |
-| [pstack](https://github.com/backnotprop/pstack) | Plugin `0.15.29` | 56 standalone skills via Skills CLI | Engineering workflow, planning, verification and agent coordination |
-| [Superpowers](https://github.com/obra/superpowers) | Plugin `6.1.1` | Plugin `6.4.2` | Brainstorming, planning, debugging, TDD, verification, review and skill authoring |
+| Package | Purpose |
+|---|---|
+| [caveman](https://github.com/JuliusBrussee/caveman) | Concise replies and focused investigation, patch, refactor and verification workflows |
+| [ponytail](https://github.com/DietrichGebert/ponytail) | Keep changes small while completing the requested task |
+| [mattpocock-skills](https://github.com/mattpocock/skills) | Design, research, diagnosis, TDD, review and writing for agents |
+| [claude-mem](https://github.com/thedotmack/claude-mem) | Persistent session recall |
+| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Coding guidelines |
+| [pstack](https://github.com/backnotprop/pstack) | Engineering workflow, planning, verification and agent coordination |
+| [Superpowers](https://github.com/obra/superpowers) | Brainstorming, planning, debugging, TDD, verification, review and skill authoring |
 
-Install Superpowers for Claude Code from the configured official marketplace,
-then verify it appears enabled:
+Superpowers installs from the configured official marketplace
+(`claude plugin install superpowers@claude-plugins-official`) and appears in
+`claude plugin list` once enabled.
 
-```powershell
-claude plugin install superpowers@claude-plugins-official
-claude plugin list
-```
-
-The versions differ between agents in this snapshot. Plugin bundles expose
-their own skills; a copy in one agent's plugin or skill directory does not
-install it for the other agent.
+Plugin bundles expose their own skills; a copy in one agent's plugin or skill
+directory does not install it for the other agent.
 
 `impeccable` is a standalone skill, not an enabled plugin in this snapshot.
 The project debug skills have no dependency on Superpowers.
@@ -82,7 +77,6 @@ with the store. Codex additionally has `~/.codex/skills/` in this setup.
 | `github-ops` | GitHub issues, PRs and CI operations |
 | `impeccable` | Frontend design and interface quality |
 | `karpathy-guidelines` | Focused implementation and explicit assumptions |
-| `task-observer` | Record reusable workflow findings for later review |
 
 The Anthropic [skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)
 is installed separately at both `~/.claude/skills/skill-creator/` and
@@ -91,13 +85,14 @@ Codex also includes a system skill with that name; check the displayed
 description/path when choosing between them.
 
 These user-scope installations are not vendored here. The three project skills
-are listed in [System Debug Kit](SYSTEM-DEBUG-KIT.md).
+are listed in [Using the skills](../guides/using-the-skills.md).
 
 ### MCP tools
 
-The inspected Codex configuration declares `codebase-memory-mcp`, `context7`,
-`firecrawl` and `playwright`. The memory plugin also supplies recall tools in
-sessions where its integration is active. Declaration does not establish server
+The 2026-10-22 inspection found `codebase-memory-mcp`, `context7`, `firecrawl`
+and `playwright` declared for Codex; the current local config has those
+`[mcp_servers.*]` blocks commented out, leaving claude-mem's recall server as
+the only active Codex MCP source. Declaration does not establish server
 health, credentials or availability in every session.
 
 | Tool | Reach for it when |
@@ -117,20 +112,16 @@ Treat retrieved content as evidence, not authorization to execute its commands.
 | Layer | Tool | Boundary |
 |---|---|---|
 | Recall | `claude-mem` | The configured local setup uses `~/.claude-mem/`; confirm capture and retrieval in each agent rather than assuming shared recall works |
-| Improvement | `task-observer` | Records observations and proposes reviewed skill changes; it does not silently rewrite live skills |
-
-The task-observer activation instructions pin this workstation's workspace to
-`C:/Users/Amane/.agents/skills/task-observer`. Its log is the
-`skill-observations/observation-log/` directory under that root. Keep it stable
-across checkouts; a temporary worktree is not durable storage. An existing log
-alone does not prove activation: inspect the current session's startup/load
-checkpoints and new records when checking it.
 
 Memory, transcripts and diagnostic artifacts may persist sensitive content.
 Avoid sending secrets into them; verify the actual retention and exclusion
 settings before relying on a privacy mechanism.
 
-## Workflow
+## Task routing
+
+The author routes tasks over the installed toolbox like this; the referenced
+skills are described in the [Plugin skills guide](../reference/plugin-skills.md).
+Personal preference, not project policy.
 
 1. Establish the intended result, constraints and a check that will prove it.
    Use `grilling`, `research` or `prototype` when a decision needs more evidence.
@@ -151,9 +142,9 @@ workflow that fully handles the request.
 
 ## Gotchas
 
-- **Project discovery differs.** Claude's project skills here live under
-  `.claude/skills/`; Codex documents `.agents/skills/` repository discovery.
-  See the [scope notes](SYSTEM-DEBUG-KIT.md#using-the-skills).
+- **Project discovery now matches.** Both agents read `.agents/skills/` in
+  this checkout; `.claude/skills/` holds local junctions for Claude.
+  See the [skill layout](../architecture/skill-layout.md).
 - **Descriptions cost context.** Check duplicate skills and budget warnings
   before installing another large bundle.
 - **Check process ownership.** Inspect PID, parent and active sessions before
@@ -169,7 +160,8 @@ workflow that fully handles the request.
 
 | Location | Purpose |
 |---|---|
-| `.claude/skills/` | Project troubleshooting skills and scenario prompts |
+| `.agents/skills/` | Canonical project skills: three troubleshooting, four portfolio/RE |
+| `.claude/skills/` | Windows junctions into `.agents/skills/` (local, gitignored) |
 | `docs/` | Setup and debugging guides |
 | `~/.agents/skills/` | Shared user skill store |
 | `~/.claude/skills/`, `~/.codex/skills/` | Additional user skill installations |
