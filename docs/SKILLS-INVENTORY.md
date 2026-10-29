@@ -20,11 +20,10 @@ Plugin skills appear namespaced as `plugin:skill-name` in the session skill list
 | `pstack@cursor-plugins` | 0.15.29 | setup-pstack (agents: poteto-agent, comment-sicko) |
 | `andrej-karpathy-skills@karpathy-skills` | 1.0.0 | karpathy-guidelines |
 
-### Standalone user-scope skills (`~/.claude/skills/`, 12)
+### Standalone user-scope skills (`~/.claude/skills/`, 11)
 
 codebase-memory, create-readme, find-skills, git-workflow-and-versioning,
 github-ops, hyperframes, hyperframes-cli, hyperframes-registry, impeccable,
-media-use, skill-creator, task-observer
 
 ### Built-in Claude Code skills (bundled, not plugins)
 

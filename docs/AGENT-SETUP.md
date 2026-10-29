@@ -82,7 +82,6 @@ with the store. Codex additionally has `~/.codex/skills/` in this setup.
 | `github-ops` | GitHub issues, PRs and CI operations |
 | `impeccable` | Frontend design and interface quality |
 | `karpathy-guidelines` | Focused implementation and explicit assumptions |
-| `task-observer` | Record reusable workflow findings for later review |
 
 The Anthropic [skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)
 is installed separately at both `~/.claude/skills/skill-creator/` and
@@ -117,14 +116,6 @@ Treat retrieved content as evidence, not authorization to execute its commands.
 | Layer | Tool | Boundary |
 |---|---|---|
 | Recall | `claude-mem` | The configured local setup uses `~/.claude-mem/`; confirm capture and retrieval in each agent rather than assuming shared recall works |
-| Improvement | `task-observer` | Records observations and proposes reviewed skill changes; it does not silently rewrite live skills |
-
-The task-observer activation instructions pin this workstation's workspace to
-`C:/Users/Amane/.agents/skills/task-observer`. Its log is the
-`skill-observations/observation-log/` directory under that root. Keep it stable
-across checkouts; a temporary worktree is not durable storage. An existing log
-alone does not prove activation: inspect the current session's startup/load
-checkpoints and new records when checking it.
 
 Memory, transcripts and diagnostic artifacts may persist sensitive content.
 Avoid sending secrets into them; verify the actual retention and exclusion
