@@ -4,7 +4,7 @@
 
 [Get started](#quick-start) | [Troubleshooting skills](#troubleshooting-skills) | [Documentation](#documentation)
 
-Playground collects seven project skills and notes about one working agent
+Playground collects six project skills and notes about one working agent
 setup. Use the skills to investigate software bugs and Linux or Windows
 incidents, or for portfolio and reverse-engineering work.
 
@@ -15,7 +15,7 @@ incidents, or for portfolio and reverse-engineering work.
 ## What this repository contains
 
 - Seven self-contained skills in `.agents/skills/` (canonical, committed):
-  three troubleshooting skills and four portfolio/reverse-engineering skills.
+  three troubleshooting skills and three portfolio skills.
 - Documentation under `docs/`: setup, guides, workflows, architecture, reference.
 
 ## Quick start
@@ -49,7 +49,7 @@ Claude Code discovers project skills in `.claude/skills/`; Codex discovers
 Each skill includes scenario prompts under `evals/evals.json` for reviewing its
 decisions. Usage limits are covered in
 [Using the skills](docs/guides/using-the-skills.md#limits), which also lists
-the four portfolio skills.
+the three portfolio skills.
 
 ## Agent compatibility
 
@@ -90,7 +90,7 @@ discovery details: [Skill layout](docs/architecture/skill-layout.md).
 
 ```text
 playground/
-├── .agents/skills/     canonical project skills ×7 (Codex discovery)
+├── .agents/skills/     canonical project skills ×6 (Codex discovery)
 ├── .claude/skills/     junctions into .agents/skills (gitignored, local only)
 ├── docs/
 │   ├── setup/          agent-setup.md

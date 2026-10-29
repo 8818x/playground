@@ -50,9 +50,9 @@ automatically.
 ├── jd-to-portfolio-tutor/          SKILL.md + agents/
 ├── job-description-analyzer/       SKILL.md
 ├── portfolio-case-study-writer/    SKILL.md
-└── reverse-engineer-anything/      SKILL.md + references/
+└── job-description-analyzer/       SKILL.md
 
-.claude/skills/                     seven junctions into .agents/skills (gitignored)
+.claude/skills/                     six junctions into .agents/skills (gitignored)
 ```
 
 `SKILL.md` holds operational instructions. Eval files hold prompts and expected

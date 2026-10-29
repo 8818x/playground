@@ -103,7 +103,7 @@ Present in `~/.codex/plugins/cache/` with no `[plugins.*]` entry in `config.toml
 
 ## Project scope (Playground checkout)
 
-This repository ships seven project skills in `.agents/skills/` (canonical,
+This repository ships six project skills in `.agents/skills/` (canonical,
 committed); `.claude/skills/` holds compatibility junctions for Claude only.
 What each skill does: [Using the skills](../guides/using-the-skills.md).
 Why this layout: [Skill layout](../architecture/skill-layout.md).
