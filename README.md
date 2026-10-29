@@ -2,35 +2,41 @@
 
 *Troubleshooting skills and setup notes for Claude Code and Codex on Windows.*
 
-[Get started](#get-started) | [Troubleshooting skills](#troubleshooting-skills) | [Documentation](#documentation)
+[Get started](#quick-start) | [Troubleshooting skills](#troubleshooting-skills) | [Documentation](#documentation)
 
-Playground collects three project-local troubleshooting skills, a portfolio and
-reverse-engineering skill suite, and notes about one working agent setup. Use
-the skills to investigate software bugs and Linux or Windows incidents, and the
-guides to understand the surrounding tools and workflow.
+Playground collects seven project skills and notes about one working agent
+setup. Use the skills to investigate software bugs and Linux or Windows
+incidents, or for portfolio and reverse-engineering work.
 
 > [!NOTE]
 > This repository records a machine-specific setup; it is not an installer.
 > Cloning it does not install plugins, configure credentials, or start services.
 
-## Get started
+## What this repository contains
+
+- Seven self-contained skills in `.agents/skills/` (canonical, committed):
+  three troubleshooting skills and four portfolio/reverse-engineering skills.
+- Documentation under `docs/`: setup, guides, workflows, architecture, reference.
+
+## Quick start
 
 1. Open this repository in your terminal or editor.
-2. Read the [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) and choose a skill for
-   the incident.
-3. Give the agent the symptom, affected target, evidence, and allowed actions.
-   Start with diagnosis when the cause is unknown.
-
-Claude Code discovers project skills in `.claude/skills/`; Codex discovers
-`.agents/skills/`. Both directories are checked in, so both agents read the
-same skill files in this checkout.
+2. Read [Agent Setup](docs/setup/agent-setup.md) to see the tools, plugins, and
+   skills the agent starts with.
+3. Read [Using the skills](docs/guides/using-the-skills.md) and choose a skill
+   for the incident.
+4. Brief the agent as [Using the skills](docs/guides/using-the-skills.md)
+   describes.
 
 Example request:
 
 ```text
-Read .agents/skills/windows-troubleshooting/SKILL.md and investigate this PC's
-intermittent application crashes. Collect read-only evidence first.
+Read .agents/skills/linux-troubleshooting/SKILL.md and check why port 443
+refuses connections on this server. Diagnosis only.
 ```
+
+Claude Code discovers project skills in `.claude/skills/`; Codex discovers
+`.agents/skills/`.
 
 ## Troubleshooting skills
 
@@ -41,41 +47,57 @@ intermittent application crashes. Collect read-only evidence first.
 | [windows-troubleshooting](.agents/skills/windows-troubleshooting/SKILL.md) | Windows crashes, slowness, storage, services, drivers, updates, and connectivity |
 
 Each skill includes scenario prompts under `evals/evals.json` for reviewing its
-decisions. They are not an automatic test runner and do not authorize changes to
-a real machine.
+decisions. Usage limits are covered in
+[Using the skills](docs/guides/using-the-skills.md#limits), which also lists
+the four portfolio skills.
 
-## Portfolio and reverse-engineering skills
+## Agent compatibility
 
-All seven project skills live canonically in `.agents/skills/`; `.claude/skills/`
-holds local Windows junctions to them (not committed).
-
-| Skill | Use it for |
-|---|---|
-| [jd-to-portfolio-tutor](.agents/skills/jd-to-portfolio-tutor/SKILL.md) | Learning a tool or stack from a job description by building a guided portfolio project |
-| [job-description-analyzer](.agents/skills/job-description-analyzer/SKILL.md) | Scoring a job posting, finding skill gaps, planning the application |
-| [portfolio-case-study-writer](.agents/skills/portfolio-case-study-writer/SKILL.md) | Turning resume bullets into detailed case studies |
-| [reverse-engineer-anything](.agents/skills/reverse-engineer-anything/SKILL.md) | Decompiling and explaining shipped software without source |
+Canonical project skills live in `.agents/skills/`. Claude Code uses
+junctions under `.claude/skills/` pointing at the same directories. Reasoning and
+discovery details: [Skill layout](docs/architecture/skill-layout.md).
 
 ## Documentation
 
-| Guide | Contents |
-|---|---|
-| [Agent Setup](docs/AGENT-SETUP.md) | A verified snapshot of one workstation's tools, plugins, memory, and workflow |
-| [System Debug Kit](docs/SYSTEM-DEBUG-KIT.md) | Skill selection, scope, examples, repository layout, and validation limits |
-| [Skills Inventory](docs/SKILLS-INVENTORY.md) | Every installed user-scope skill for Claude and Codex, split by source |
-| [Plugin Skills Guide](docs/PLUGIN-SKILLS.md) | Plain-language description of every skill inside the seven installed plugins |
+### Setup
+
+- [Agent Setup](docs/setup/agent-setup.md) — the workstation behind Playground:
+  tools, plugins, memory, workflow
+
+### Guides
+
+- [Using the skills](docs/guides/using-the-skills.md) — choosing a skill,
+  briefing the agent, usage limits
+
+### Workflows
+
+- [Skill development](docs/workflows/skill-development.md) — changing a project
+  skill safely
+
+### Architecture
+
+- [Skill layout](docs/architecture/skill-layout.md) — why one canonical copy
+  plus compatibility junctions
+
+### Reference
+
+- [Skills inventory](docs/reference/skills-inventory.md) — every installed
+  user-scope skill for Claude and Codex, split by source
+- [Plugin skills guide](docs/reference/plugin-skills.md) — plain-language
+  description of every skill inside the seven installed plugins
 
 ## Repository layout
 
 ```text
 playground/
-├── .agents/skills/          canonical project skills ×7 (Codex discovery)
-├── .claude/skills/          seven junctions into .agents/skills (local only)
+├── .agents/skills/     canonical project skills ×7 (Codex discovery)
+├── .claude/skills/     junctions into .agents/skills (gitignored, local only)
 ├── docs/
-│   ├── AGENT-SETUP.md
-│   ├── SYSTEM-DEBUG-KIT.md
-│   ├── SKILLS-INVENTORY.md
-│   └── PLUGIN-SKILLS.md
+│   ├── setup/          agent-setup.md
+│   ├── guides/         using-the-skills.md
+│   ├── workflows/      skill-development.md
+│   ├── architecture/   skill-layout.md
+│   └── reference/      skills-inventory.md, plugin-skills.md
 ├── LICENSE
 └── README.md
 ```

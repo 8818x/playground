@@ -4,7 +4,7 @@
 
 *The workstation behind Playground*
 
-[Repository](../README.md) · [Debug kit](SYSTEM-DEBUG-KIT.md)
+[Repository](../../README.md) · [Using the skills](../guides/using-the-skills.md)
 
 </div>
 
@@ -35,7 +35,7 @@ codex --version
 ### Plugins
 
 These packages are installed for both agents. Current versions and skill
-lists live in the [Skills inventory](SKILLS-INVENTORY.md); check
+lists live in the [Skills inventory](../reference/skills-inventory.md); check
 Claude's plugin list and Codex's plugin/skill catalog independently.
 
 | Package | Purpose |
@@ -85,7 +85,7 @@ Codex also includes a system skill with that name; check the displayed
 description/path when choosing between them.
 
 These user-scope installations are not vendored here. The three project skills
-are listed in [System Debug Kit](SYSTEM-DEBUG-KIT.md).
+are listed in [Using the skills](../guides/using-the-skills.md).
 
 ### MCP tools
 
@@ -117,7 +117,11 @@ Memory, transcripts and diagnostic artifacts may persist sensitive content.
 Avoid sending secrets into them; verify the actual retention and exclusion
 settings before relying on a privacy mechanism.
 
-## Workflow
+## Task routing
+
+The author routes tasks over the installed toolbox like this; the referenced
+skills are described in the [Plugin skills guide](../reference/plugin-skills.md).
+Personal preference, not project policy.
 
 1. Establish the intended result, constraints and a check that will prove it.
    Use `grilling`, `research` or `prototype` when a decision needs more evidence.
@@ -140,7 +144,7 @@ workflow that fully handles the request.
 
 - **Project discovery now matches.** Both agents read `.agents/skills/` in
   this checkout; `.claude/skills/` holds local junctions for Claude.
-  See the [scope notes](SYSTEM-DEBUG-KIT.md#using-the-skills).
+  See the [skill layout](../architecture/skill-layout.md).
 - **Descriptions cost context.** Check duplicate skills and budget warnings
   before installing another large bundle.
 - **Check process ownership.** Inspect PID, parent and active sessions before

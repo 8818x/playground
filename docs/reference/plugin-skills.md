@@ -1,14 +1,15 @@
-# Plugin Skills Guide
+<div align="center">
 
-What every installed plugin actually gives you, skill by skill, in plain words
+# Plugin skills guide
 
-[Inventory](SKILLS-INVENTORY.md) · [Agent setup](AGENT-SETUP.md)
+*What every installed plugin actually gives you, skill by skill, in plain words*
 
----
+[Repository](../../README.md) · [Skills inventory](skills-inventory.md) · [Agent setup](../setup/agent-setup.md)
 
-Snapshot: 2026-10-24, Claude-side versions. Codex runs the same plugins at
-newer releases (`superpowers` 7.0.0, `pstack` 0.15.36); the inventory holds
-the full Codex picture.
+</div>
+
+Snapshot: 2026-10-24, Claude-side versions. Codex runs the same plugins; its
+`superpowers` 7.0.0 and `pstack` 0.15.32 are newer.
 
 ---
 
@@ -266,7 +267,7 @@ skills you'd invoke.
 > **Deliberate overlaps exist.** `tdd`, `code-review`/`ponytail-review`,
 > `handoff`, `teach` and the grill family appear in more than one plugin.
 > Each agent loads every description into context, so every duplicate costs
-> tokens — see the [setup notes](AGENT-SETUP.md#toolbox).
+> tokens — see the [setup notes](../setup/agent-setup.md#toolbox).
 
 > [!TIP]
 > Skills that say "use when…" trigger automatically; the rest are

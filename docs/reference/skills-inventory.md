@@ -1,4 +1,12 @@
-# Skills Inventory
+<div align="center">
+
+# Skills inventory
+
+*Every installed user-scope skill for Claude Code and Codex, by source*
+
+[Repository](../../README.md) · [Agent setup](../setup/agent-setup.md) · [Plugin skills](plugin-skills.md)
+
+</div>
 
 Agent skills installed at **user scope**, split by source, for Claude Code and Codex.
 Snapshot date: 2026-10-29.
@@ -26,7 +34,7 @@ clones in `marketplaces/`.
 
 Nine plain directories: codebase-memory, git-workflow-and-versioning, github-ops,
 hyperframes, hyperframes-cli, hyperframes-registry, impeccable, media-use,
-skill-creator. Two junctions into the shared store: create-readme, find-skills →
+skill-creator. Two symlinks into the shared store: create-readme, find-skills →
 `~/.agents/skills/<name>`.
 
 The `task-observer` junction was broken (store folder deleted) and was removed
@@ -60,48 +68,42 @@ Skills load by convention from `$CODEX_HOME/skills`; `config.toml` has no
 
 `jd-to-portfolio-tutor` moved to Playground project scope (see below).
 
-### From plugins (7, registered in `config.toml`, all enabled)
+### From plugins (7, registered in `config.toml`)
 
-Same marketplaces as the Claude side. Skills ship without a namespace prefix
-on Codex. Cache re-checked 2026-10-30 against `~/.codex/plugins/cache/` and
-`config.toml`.
+Same marketplaces as the Claude side, all enabled: ponytail, caveman,
+mattpocock-skills, andrej-karpathy-skills, pstack, superpowers, and claude-mem
+via the local variant `claude-mem@claude-mem-local` (`claude-mem@thedotmack` is
+disabled on the Codex side). Skills ship without a namespace prefix on Codex.
+
+Versions below are from the 2026-10-24 snapshot (verified set re-checked
+2026-10-29; individual versions not re-read):
 
 | Plugin | Codex version | Skills provided |
 |---|---|---|
-| `caveman@caveman` | 4.0.1 | same set as the Claude side (22), unprefixed |
-| `ponytail@ponytail` | 5.3.3 | same set as the Claude side (6), unprefixed |
-| `mattpocock-skills@mattpocock` | 1.3.2 | same set as the Claude side (38), unprefixed |
-| `claude-mem@claude-mem-local` | 15.3.0 | same set as the Claude side (30), unprefixed; `claude-mem@thedotmack` is registered but disabled |
+| `caveman@caveman` | 4.0.1 | same set as the Claude side, unprefixed |
+| `ponytail@ponytail` | 5.3.2 | same set as the Claude side, unprefixed |
+| `mattpocock-skills@mattpocock` | 1.3.1 | skills live in subfolders (productivity, misc, engineering, …) |
+| `claude-mem@claude-mem-local` | 13.41.0 | same set as the Claude side, unprefixed |
 | `andrej-karpathy-skills@karpathy-skills` | 1.0.0 | karpathy-guidelines |
-| `pstack@cursor-plugins` | 0.15.36 | Claude set (56) plus `ketchup-video` and `statechart` |
-| `superpowers@claude-plugins-official` | 7.0.0 | Claude set (14) plus `diagnosing-superpowers` |
+| `pstack@cursor-plugins` | 0.15.32 | setup-pstack + workflow/agent skills |
+| `superpowers@claude-plugins-official` | 7.0.0 | brainstorming, systematic-debugging, TDD, planning and verification set |
 
-Version drift vs Claude: `ponytail` 5.3.2 -> 5.3.3, `mattpocock-skills` 1.3.1 ->
-1.3.2, `pstack` 0.15.29 -> 0.15.36, `superpowers` 6.1.1 -> 7.0.0 (Codex installs
-the latest marketplace release). claude-mem differs by source: Codex runs the
-local-source plugin at 15.3.0, Claude runs the fork build at 15.5.0.
+Version drift vs Claude: `pstack` 0.15.29 → 0.15.32 and `superpowers` 6.1.1 → 7.0.0
+(Codex installs the latest marketplace release).
 
 ### Cached but not enabled
 
-Present in `~/.codex/plugins/cache/` with no enabled `[plugins.*]` entry
-(re-checked 2026-10-30):
+Present in `~/.codex/plugins/cache/` with no `[plugins.*]` entry in `config.toml`
+(from the 2026-10-24 snapshot, not re-verified):
 
-- `openai-curated-remote` - google-drive (5), openai-templates (20 artifact
-  templates), plugin-management (1), sites + sites-remix (2), work-pets (3),
-  and its own superpowers 7.0.1 copy (15)
-- `ecc` - empty
+- `ecc` — empty
+- `openai-curated-remote` — google-docs/-drive/-sheets/-slides/-comments, artifact
+  report templates, plugin-management, sites-remix, and a bundled copy of the
+  superpowers skill set
 
 ## Project scope (Playground checkout)
 
-The project skill suite lives in this repo at `.agents/skills/` (canonical,
-committed) — three troubleshooting skills plus four portfolio/RE skills.
-`.claude/skills/` holds Windows junctions to them (gitignored, local
-convenience only); Codex discovers `.agents/skills/` natively, so it needs
-no link.
-
-| Skill | In plain words |
-|---|---|
-| jd-to-portfolio-tutor | Learn a tool or stack from a job description by building a guided portfolio project with checkpoints |
-| job-description-analyzer | Score a job posting against your skills, find gaps, plan the application |
-| portfolio-case-study-writer | Turn resume bullets into detailed portfolio case studies |
-| reverse-engineer-anything | Decompile and explain shipped software (native, Electron, firmware) with REA |
+This repository ships seven project skills in `.agents/skills/` (canonical,
+committed); `.claude/skills/` holds compatibility junctions for Claude only.
+What each skill does: [Using the skills](../guides/using-the-skills.md).
+Why this layout: [Skill layout](../architecture/skill-layout.md).
