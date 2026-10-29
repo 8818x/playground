@@ -1,29 +1,36 @@
 # Skills Inventory
 
 Agent skills installed at **user scope**, split by source, for Claude Code and Codex.
-Snapshot date: 2026-10-24.
+Snapshot date: 2026-10-29.
 
 ## Claude Code (`~/.claude`)
 
-### From plugins (7)
+### From plugins (7 plugins, 167 skills)
 
 All installed with `scope: user` (see `~/.claude/plugins/installed_plugins.json`).
 Plugin skills appear namespaced as `plugin:skill-name` in the session skill list.
+Installed copies live in `cache/<marketplace>/<plugin>/<version>/`; marketplace
+clones in `marketplaces/`.
 
 | Plugin | Version | Skills provided |
 |---|---|---|
 | `superpowers@claude-plugins-official` | 6.1.1 | brainstorming, systematic-debugging, test-driven-development, writing-plans, executing-plans, subagent-driven-development, using-git-worktrees, using-superpowers, verification-before-completion, requesting-code-review, receiving-code-review, finishing-a-development-branch, writing-skills, dispatching-parallel-agents |
+| `claude-mem@thedotmack` | 15.5.0 (auto-update) | mem-search, make-plan, do, build, release, babysit, handoff, learn-codebase, smart-explore, pathfinder, standup, how-it-works, knowledge-agent, timeline-report, weekly-digests, mode-creator, cloud-sync, screenpipe, ccs-align, oh-my-issues, version-bump, build-and-release, childhood, design-is, agent-cost-report, what-the, wowerpoint, backup-setup, owner-goals, request-progress (30) |
+| `pstack@cursor-plugins` | 0.15.29 | 56 skills: poteto stack (poteto-mode, poteto-help, automate-me), 24 `principle-*` practice skills, plus architect, arena, benchmark-checklist, blast-radius, bro, correct, create-formal-verification-skill, create-verification-skill, figure-it-out, how, in-your-own-words, interrogate, ketchup, maintain-formal-verification-skill, maintain-verification-skill, make-bot-ui, no-comments, recall, reflect, sharpen, setup-pstack, show-me-your-work, swarm, tdd, teach, technical-writing, typescript-best-practices, unslop, why (agents: poteto-agent, comment-sicko) |
+| `caveman@caveman` | 4.0.1 | caveman, caveman-commit, caveman-compress, caveman-discover, caveman-evidence-review, caveman-explore, caveman-help, caveman-learn, caveman-manage, caveman-optimize, caveman-review, caveman-setup, caveman-stats, cavecrew, megacave, ultracave, investigate-first, lean-build, migration, safe-refactor, surgical-patch, verify-and-stop — `caveman-init` ships as a command, not a skill (agents: cavecrew-builder, cavecrew-investigator, cavecrew-reviewer) |
+| `mattpocock-skills@mattpocock` | 1.3.1 | 38 skills: ask-matt, chief-of-staff, claude-handoff, code-review, codebase-design, diagnosing-bugs, domain-modeling, git-guardrails-claude-code, grill-me, grill-with-docs, grilling, handoff, implement, implement-spec, improve-codebase-architecture, loop-me, migrate-to-shoehorn, pr, prototype, research, retro, scaffold-exercises, setup-matt-pocock-skills, setup-pre-commit, setup-ts-deep-modules, tdd, teach, to-questionnaire, to-spec, to-tickets, triage, wait-what, wayfinder, wizard, writing-beats, writing-fragments, writing-for-agents, writing-shape |
 | `ponytail@ponytail` | 5.3.2 | ponytail, ponytail-audit, ponytail-debt, ponytail-gain, ponytail-help, ponytail-review |
-| `caveman@caveman` | 4.0.1 | caveman, caveman-init, caveman-commit, caveman-compress, caveman-discover, caveman-evidence-review, caveman-explore, caveman-help, caveman-learn, caveman-manage, caveman-optimize, caveman-review, caveman-setup, caveman-stats, investigate-first, lean-build, migration, safe-refactor, surgical-patch, verify-and-stop, cavecrew (agents: cavecrew-builder, cavecrew-investigator, cavecrew-reviewer) |
-| `mattpocock-skills@mattpocock` | 1.3.1 | tdd, code-review, pr, prototype, research, domain-modeling, codebase-design, diagnosing-bugs, grilling, wizard, writing-for-agents |
-| `claude-mem@thedotmack` | 13.41.0 | mem-search, make-plan, do, build, release, babysit, handoff, learn-codebase, smart-explore, pathfinder, standup, how-it-works, knowledge-agent, timeline-report, weekly-digests, mode-creator, cloud-sync, screenpipe, ccs-align, oh-my-issues, version-bump, build-and-release, childhood, design-is, agent-cost-report, what-the, wowerpoint |
-| `pstack@cursor-plugins` | 0.15.29 | setup-pstack (agents: poteto-agent, comment-sicko) |
 | `andrej-karpathy-skills@karpathy-skills` | 1.0.0 | karpathy-guidelines |
 
-### Standalone user-scope skills (`~/.claude/skills/`, 11)
+### Standalone user-scope skills (`~/.claude/skills/`, 11 live)
 
-codebase-memory, create-readme, find-skills, git-workflow-and-versioning,
-github-ops, hyperframes, hyperframes-cli, hyperframes-registry, impeccable,
+Nine plain directories: codebase-memory, git-workflow-and-versioning, github-ops,
+hyperframes, hyperframes-cli, hyperframes-registry, impeccable, media-use,
+skill-creator. Two junctions into the shared store: create-readme, find-skills →
+`~/.agents/skills/<name>`.
+
+The `task-observer` junction was broken (store folder deleted) and was removed
+on 2026-10-29.
 
 ### Built-in Claude Code skills (bundled, not plugins)
 
@@ -31,39 +38,58 @@ claude-api, code-review, dataviz, fewer-permission-prompts, init,
 keybindings-help, loop, plugin-authoring, run, security-review, simplify,
 update-config, workflow-authoring
 
+## Shared skill store (`~/.agents/skills/`, 72)
+
+Plain directories read directly by QwenWork and other harnesses; Claude Code
+consumes entries selectively via links in `~/.claude/skills/`. Families:
+`principle-*` (24), the poteto stack, the hyperframes trio, plus dev-loop,
+swarm, technical-writing, unslop and others. Several names duplicate
+plugin-provided skills (pstack, mattpocock); the store holds independent
+copies.
+
 ## Codex (`~/.codex`)
 
-### Standalone user-scope skills (`~/.codex/skills/`, 1)
+### Standalone user-scope skills (`~/.codex/skills/`)
 
-skill-creator
+- `skills/skill-creator/` — user-installed
+- `skills/.system/` — five built-in system skills: imagegen, openai-docs,
+  review-agent, skill-creator (system), skill-installer
+
+Skills load by convention from `$CODEX_HOME/skills`; `config.toml` has no
+`[skills]` section, and `.system/` is reserved for Codex's own skills.
 
 `jd-to-portfolio-tutor` moved to Playground project scope (see below).
 
-### From plugins (7, registered in `config.toml`)
+### From plugins (7, registered in `config.toml`, all enabled)
 
-Same set as the Claude side. Skills ship without a namespace prefix on Codex.
+Same marketplaces as the Claude side. Skills ship without a namespace prefix
+on Codex. Cache re-checked 2026-10-30 against `~/.codex/plugins/cache/` and
+`config.toml`.
 
 | Plugin | Codex version | Skills provided |
 |---|---|---|
-| `caveman@caveman` | 4.0.1 | same set as the Claude side, unprefixed |
-| `ponytail@ponytail` | 5.3.2 | ponytail, ponytail-audit, ponytail-debt, ponytail-gain, ponytail-help, ponytail-review |
-| `mattpocock-skills@mattpocock` | 1.3.1 | skills live in subfolders (productivity, misc, engineering, …) |
-| `claude-mem@claude-mem-local` | 13.41.0 | same set as the Claude side, unprefixed |
+| `caveman@caveman` | 4.0.1 | same set as the Claude side (22), unprefixed |
+| `ponytail@ponytail` | 5.3.3 | same set as the Claude side (6), unprefixed |
+| `mattpocock-skills@mattpocock` | 1.3.2 | same set as the Claude side (38), unprefixed |
+| `claude-mem@claude-mem-local` | 15.3.0 | same set as the Claude side (30), unprefixed; `claude-mem@thedotmack` is registered but disabled |
 | `andrej-karpathy-skills@karpathy-skills` | 1.0.0 | karpathy-guidelines |
-| `pstack@cursor-plugins` | 0.15.32 | setup-pstack + workflow/agent skills |
-| `superpowers@claude-plugins-official` | 7.0.0 | brainstorming, systematic-debugging, TDD, planning and verification set |
+| `pstack@cursor-plugins` | 0.15.36 | Claude set (56) plus `ketchup-video` and `statechart` |
+| `superpowers@claude-plugins-official` | 7.0.0 | Claude set (14) plus `diagnosing-superpowers` |
 
-Version drift vs Claude: `pstack` 0.15.29 → 0.15.32 and `superpowers` 6.1.1 → 7.0.0
-(Codex installs the latest marketplace release).
+Version drift vs Claude: `ponytail` 5.3.2 -> 5.3.3, `mattpocock-skills` 1.3.1 ->
+1.3.2, `pstack` 0.15.29 -> 0.15.36, `superpowers` 6.1.1 -> 7.0.0 (Codex installs
+the latest marketplace release). claude-mem differs by source: Codex runs the
+local-source plugin at 15.3.0, Claude runs the fork build at 15.5.0.
 
 ### Cached but not enabled
 
-Present in `~/.codex/plugins/cache/` with no `[plugins.*]` entry in `config.toml`:
+Present in `~/.codex/plugins/cache/` with no enabled `[plugins.*]` entry
+(re-checked 2026-10-30):
 
-- `ecc` — empty
-- `openai-curated-remote` — google-docs/-drive/-sheets/-slides/-comments, artifact
-  report templates, plugin-management, sites-remix, and a bundled copy of the
-  superpowers skill set
+- `openai-curated-remote` - google-drive (5), openai-templates (20 artifact
+  templates), plugin-management (1), sites + sites-remix (2), work-pets (3),
+  and its own superpowers 7.0.1 copy (15)
+- `ecc` - empty
 
 ## Project scope (Playground checkout)
 

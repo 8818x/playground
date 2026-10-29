@@ -1,20 +1,21 @@
 # Plugin Skills Guide
 
-What every installed plugin actually gives you, skill by skill — each description
-restated in plain words instead of the original marketing sentence.
+What every installed plugin actually gives you, skill by skill, in plain words
 
 [Inventory](SKILLS-INVENTORY.md) · [Agent setup](AGENT-SETUP.md)
 
-Snapshot: 2026-10-24, Claude-side versions. Codex runs the same plugins
-(`superpowers` 7.0.0 and `pstack` 0.15.32 there are newer).
+---
+
+Snapshot: 2026-10-24, Claude-side versions. Codex runs the same plugins at
+newer releases (`superpowers` 7.0.0, `pstack` 0.15.36); the inventory holds
+the full Codex picture.
 
 ---
 
 ## superpowers — the disciplined process coach
 
 Tells the agent *how to work*: brainstorm before building, plan before coding,
-prove things work before claiming they do. You get this for free on most tasks;
-the skill names are worth knowing because you can invoke them directly.
+prove things work before claiming they do. Invoke any of them by name.
 
 | Skill | In plain words |
 |---|---|
@@ -249,6 +250,9 @@ skills you'd invoke.
 | what-the | "What the?" — plain-English who/what/where/why/when breakdown of anything technical |
 | wowerpoint | Turns one document into a kawaii slide deck |
 | ccs-align | Hourly health-and-alignment cycle for the local claude-mem worker (ops) |
+| backup-setup | Set up, check, or restore local claude-mem database snapshots |
+| owner-goals | Maps your own prompts into focus areas, asks, and rules in My Work |
+| request-progress | Groups conversations into requests with progress meters and velocity in My Work |
 
 ## andrej-karpathy-skills — one skill
 

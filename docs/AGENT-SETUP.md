@@ -34,31 +34,26 @@ codex --version
 
 ### Plugins
 
-These entries were verified in the local plugin and skill inventories. Each
-agent has its own installation scope and may have a different version; check
+These packages are installed for both agents. Current versions and skill
+lists live in the [Skills inventory](SKILLS-INVENTORY.md); check
 Claude's plugin list and Codex's plugin/skill catalog independently.
 
-| Package | Claude | Codex | Purpose |
-|---|---|---|---|
-| [caveman](https://github.com/JuliusBrussee/caveman) | Plugin `4.0.1` | Plugin `4.0.1` | Concise replies and focused investigation, patch, refactor and verification workflows |
-| [ponytail](https://github.com/DietrichGebert/ponytail) | Plugin `5.3.2` | Plugin `5.3.2` | Keep changes small while completing the requested task |
-| [mattpocock-skills](https://github.com/mattpocock/skills) | Plugin `1.3.1` | Plugin `1.3.1` | Design, research, diagnosis, TDD, review and writing for agents |
-| [claude-mem](https://github.com/thedotmack/claude-mem) | Plugin `13.41.0` | Local plugin source `13.41.0` | Persistent session recall |
-| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Plugin `1.0.0` | Plugin `1.0.0` | Coding guidelines |
-| [pstack](https://github.com/backnotprop/pstack) | Plugin `0.15.29` | Plugin `0.15.32` | Engineering workflow, planning, verification and agent coordination |
-| [Superpowers](https://github.com/obra/superpowers) | Plugin `6.1.1` | Plugin `7.0.0` | Brainstorming, planning, debugging, TDD, verification, review and skill authoring |
+| Package | Purpose |
+|---|---|
+| [caveman](https://github.com/JuliusBrussee/caveman) | Concise replies and focused investigation, patch, refactor and verification workflows |
+| [ponytail](https://github.com/DietrichGebert/ponytail) | Keep changes small while completing the requested task |
+| [mattpocock-skills](https://github.com/mattpocock/skills) | Design, research, diagnosis, TDD, review and writing for agents |
+| [claude-mem](https://github.com/thedotmack/claude-mem) | Persistent session recall |
+| [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | Coding guidelines |
+| [pstack](https://github.com/backnotprop/pstack) | Engineering workflow, planning, verification and agent coordination |
+| [Superpowers](https://github.com/obra/superpowers) | Brainstorming, planning, debugging, TDD, verification, review and skill authoring |
 
-Install Superpowers for Claude Code from the configured official marketplace,
-then verify it appears enabled:
+Superpowers installs from the configured official marketplace
+(`claude plugin install superpowers@claude-plugins-official`) and appears in
+`claude plugin list` once enabled.
 
-```powershell
-claude plugin install superpowers@claude-plugins-official
-claude plugin list
-```
-
-The versions differ between agents in this snapshot. Plugin bundles expose
-their own skills; a copy in one agent's plugin or skill directory does not
-install it for the other agent.
+Plugin bundles expose their own skills; a copy in one agent's plugin or skill
+directory does not install it for the other agent.
 
 `impeccable` is a standalone skill, not an enabled plugin in this snapshot.
 The project debug skills have no dependency on Superpowers.
@@ -94,9 +89,10 @@ are listed in [System Debug Kit](SYSTEM-DEBUG-KIT.md).
 
 ### MCP tools
 
-The inspected Codex configuration declares `codebase-memory-mcp`, `context7`,
-`firecrawl` and `playwright`. The memory plugin also supplies recall tools in
-sessions where its integration is active. Declaration does not establish server
+The 2026-10-22 inspection found `codebase-memory-mcp`, `context7`, `firecrawl`
+and `playwright` declared for Codex; the current local config has those
+`[mcp_servers.*]` blocks commented out, leaving claude-mem's recall server as
+the only active Codex MCP source. Declaration does not establish server
 health, credentials or availability in every session.
 
 | Tool | Reach for it when |

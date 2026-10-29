@@ -4,6 +4,7 @@
 .codex/
 node_modules/
 *.log
+reports/
 
 # junctions into .agents/skills — main copies are committed there; links stay local
 .claude/skills/jd-to-portfolio-tutor/
