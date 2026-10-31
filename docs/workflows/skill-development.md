@@ -18,7 +18,8 @@ copies. Restart a session after editing so discovery reflects the change.
    tool/access limits and a completion check. Supply every referenced local file.
 3. Add realistic scenario prompts and expected behaviors under `evals/`.
    Compare old and new responses when evaluating a behavior change.
-4. Validate frontmatter, JSON, local links and command syntax. Run safe examples
+4. Validate frontmatter, JSON, local links and command syntax. Run
+   `scripts/check-docs.sh` so count claims cannot drift from disk. Run safe examples
    on the intended platform when available; report checks not run.
 5. Review the diff and repeat the original scenario before claiming improvement.
 
