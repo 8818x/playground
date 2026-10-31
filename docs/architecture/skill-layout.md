@@ -49,8 +49,7 @@ automatically.
 ├── windows-troubleshooting/        SKILL.md + evals/evals.json
 ├── jd-to-portfolio-tutor/          SKILL.md + agents/
 ├── job-description-analyzer/       SKILL.md
-├── portfolio-case-study-writer/    SKILL.md
-└── job-description-analyzer/       SKILL.md
+└── portfolio-case-study-writer/    SKILL.md
 
 .claude/skills/                     six junctions into .agents/skills (gitignored)
 ```
@@ -59,3 +58,25 @@ automatically.
 decisions for review; usage limits are covered in
 [Using the skills](../guides/using-the-skills.md#limits). Editing a skill:
 [Skill development](../workflows/skill-development.md).
+
+## Operating rules
+
+Rules for changing this layout.
+
+1. **Create before delete.** Add each replacement link and verify it resolves
+   before removing the original directory. In a batch, one failed command must
+   abort the run; a guard that runs afterwards does not stop anything.
+2. **Pilot one element first.** Run the link command on a single skill and
+   inspect the created path before looping. A broken command repeats once per
+   element.
+3. **Never `rm -rf` through a junction.** The link resolves into
+   `.agents/skills/`, so a recursive delete through it can erase the canonical
+   store. Remove a junction with `cmd //c rmdir <junction>`.
+4. **Plugin skills sit seven levels deep.** They live at
+   `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/skills/<name>/`;
+   search with `-maxdepth 8` or the glob `cache/*/*/*/skills`, or a shallow
+   `find` silently misses them.
+5. **Check every harness before pruning.** Claude and Codex reach
+   plugin-covered skills through their plugins; harnesses without a plugin
+   system, such as QwenWork, read `~/.agents/skills/` directly and lose deleted
+   entries. Confirm each consumer before removing anything from the store.

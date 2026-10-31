@@ -13,7 +13,7 @@ Snapshot: 2026-10-24, Claude-side versions. Codex runs the same plugins; its
 
 ---
 
-## superpowers — the disciplined process coach
+## superpowers, the disciplined process coach
 
 Tells the agent *how to work*: brainstorm before building, plan before coding,
 prove things work before claiming they do. Invoke any of them by name.
@@ -21,21 +21,21 @@ prove things work before claiming they do. Invoke any of them by name.
 | Skill | In plain words |
 |---|---|
 | using-superpowers | The rulebook that loads first in every session: "check if a skill applies before you do anything" |
-| brainstorming | Forces a requirements chat before any creative work — no jumping straight into code |
+| brainstorming | Forces a requirements chat before any creative work. No jumping straight into code |
 | writing-plans | Turns a rough spec into a step-by-step implementation plan |
 | executing-plans | Runs an existing plan in a fresh session, pausing for your review at checkpoints |
 | subagent-driven-development | Runs a plan by handing each task to a helper agent and checking the results |
 | dispatching-parallel-agents | Splits independent tasks across several helper agents running at once |
 | using-git-worktrees | Puts feature work in an isolated worktree so your main checkout stays clean |
 | test-driven-development | Write the failing test first, then make it pass |
-| systematic-debugging | Find the real cause before touching anything — no guess-fixing |
+| systematic-debugging | Find the real cause before touching anything. No guess-fixing |
 | verification-before-completion | Run the actual commands and read the output before saying "done" |
 | requesting-code-review | Get the finished work reviewed against the requirements |
-| receiving-code-review | Take review feedback seriously — verify claims instead of blindly agreeing |
+| receiving-code-review | Take review feedback seriously. Verify claims instead of blindly agreeing |
 | finishing-a-development-branch | Walks the merge / PR / cleanup decision once work is done |
 | writing-skills | How to write a good skill file, with TDD for the skill itself |
 
-## ponytail — the lazy senior developer
+## ponytail, the lazy senior developer
 
 One philosophy: the smallest change that fully solves the task, explained in a
 reply a busy human can read in one pass. Active by default in this workstation's
@@ -44,13 +44,13 @@ Claude sessions.
 | Skill | In plain words |
 |---|---|
 | ponytail | The mode itself: cut scope, reuse what exists, no speculative features |
-| ponytail-review | Review a change for bugs and over-engineering — "is every line needed?" |
+| ponytail-review | Review a change for bugs and over-engineering. "is every line needed?" |
 | ponytail-audit | Same suspicion applied to a whole repo, ranked most-important-first |
 | ponytail-debt | Collects every `shortcut:` comment into one debt ledger so deferrals get tracked |
 | ponytail-gain | Scoreboard of what the mode saved (code, cost, speed) |
 | ponytail-help | Quick reference card for the mode's levels and commands |
 
-## caveman — terse replies plus a token-cost toolbox
+## caveman, terse replies plus a token-cost toolbox
 
 Two halves. First, voice modes that squeeze the agent's replies down to save
 output tokens. Second, a set of focused engineering workflows and a Cloud
@@ -59,7 +59,7 @@ service that measures where tokens actually go.
 | Skill | In plain words |
 |---|---|
 | caveman | Terse "caveman voice" mode: answer first, fluff gone, facts kept |
-| megacave | The same but written in Classical Chinese (文言文) — manual invocation only |
+| megacave | The same but written in Classical Chinese (文言文). Manual invocation only |
 | ultracave | Maximum compression: sentence fragments, one word when one word is enough |
 | caveman-help | Quick-reference card for the modes and commands |
 | caveman-init | Drops an always-on activation rule into a repo so every agent speaks tersely |
@@ -79,23 +79,23 @@ service that measures where tokens actually go.
 | migration | Compatibility-safe transitions (schema, API, config) with rollback proof |
 | safe-refactor | Restructure with verification before and after, so behavior provably stays put |
 | surgical-patch | Fix a bug at the narrowest responsible layer, with regression proof |
-| verify-and-stop | Prove the work meets acceptance conditions, then actually stop — no scope creep |
+| verify-and-stop | Prove the work meets acceptance conditions, then actually stop. No scope creep |
 | cavecrew | Teaches the agent when to delegate to its three compressed-output helper agents |
 
-## mattpocock-skills — planning, diagnosis and design vocabulary
+## mattpocock-skills, planning, diagnosis and design vocabulary
 
 A large toolbox from Matt Pocock's repo, strongest on: stress-testing a plan by
 interviewing you, turning talk into specs and tickets, and a shared vocabulary
 for designing code modules. Ships 38 skills; the session skill menu exposes a
-subset — everything below exists on disk and can be invoked.
+subset. Everything below exists on disk and can be invoked.
 
 ### engineering (20)
 
 | Skill | In plain words |
 |---|---|
-| ask-matt | "Which skill fits my situation?" — a router over this whole set |
+| ask-matt | "Which skill fits my situation?". A router over this whole set |
 | code-review | Reviews changes on two axes: repo standards, and did it match the spec |
-| codebase-design | Vocabulary for designing deep modules — where seams and interfaces go |
+| codebase-design | Vocabulary for designing deep modules. Where seams and interfaces go |
 | diagnosing-bugs | Structured diagnosis loop for hard bugs and slow code |
 | domain-modeling | Builds a glossary/ADR for your project's terms |
 | grill-with-docs | Interview that sharpens a plan *and* writes ADRs and glossary as it goes |
@@ -105,7 +105,7 @@ subset — everything below exists on disk and can be invoked.
 | pr | Writes the PR body |
 | prototype | Build a throwaway prototype to answer one design question |
 | research | Investigates a question against primary sources, saves findings as Markdown |
-| retro | Retrospective on a coding session — what to keep doing, what to stop |
+| retro | Retrospective on a coding session. What to keep doing, what to stop |
 | setup-matt-pocock-skills | One-time config: issue tracker, triage labels, doc layout |
 | tdd | Test-first development: red, green, refactor |
 | to-spec | Turns the current conversation into a published spec, no extra questions |
@@ -123,7 +123,7 @@ subset — everything below exists on disk and can be invoked.
 | handoff | Compresses the conversation into a handoff doc for another agent |
 | teach | Teaches you a concept inside this workspace |
 | to-questionnaire | Turns an unanswerable decision into a questionnaire for someone else |
-| wait-what | "Stop — that explanation didn't land, try again" |
+| wait-what | "Stop, that explanation didn't land, try again" |
 | writing-for-agents | How to write documents (skills, AGENTS.md, CLAUDE.md) that agents follow |
 
 ### misc (4)
@@ -135,21 +135,21 @@ subset — everything below exists on disk and can be invoked.
 | migrate-to-shoehorn | Migrates `as` type assertions in tests to the shoehorn library |
 | scaffold-exercises | Creates course-exercise folders (problems, solutions, explainers) |
 
-### in-progress (7) — author's drafts, expect rough edges
+### in-progress (7), author's drafts, expect rough edges
 
 chief-of-staff (one session chasing a long goal via subagents), claude-handoff
 (park the work with a background agent), loop-me (grill about workflow specs),
 setup-ts-deep-modules (wire dependency-cruiser for deep modules), writing-beats
 / writing-fragments / writing-shape (a three-stage writing method).
 
-## pstack — 56 skills: principles, parallelism and proof
+## pstack, 56 skills: principles, parallelism and proof
 
 The biggest bundle. Its centre of gravity: **24 named "principles"** (one-lesson
 skills the agent applies at the right moment), **parallel worker patterns**
 (swarm, arena), **verification generators**, and **communication helpers**.
 Like mattpocock-skills, the session menu exposes a subset until configured.
 
-### Principles (24) — one lesson each
+### Principles (24), one lesson each
 
 | Skill | The lesson in plain words |
 |---|---|
@@ -171,9 +171,9 @@ Like mattpocock-skills, the session menu exposes a subset until configured.
 | principle-separate-before-serializing-shared-state | Kill shared state before adding locks around it |
 | principle-make-operations-idempotent | Commands should converge to the same end state after crashes and retries |
 | principle-sequence-verifiable-units | Split work so each unit ends verifiable, and order them so the sequence proves itself |
-| principle-never-block-on-the-human | Don't ask permission for reversible work — do it, report it |
+| principle-never-block-on-the-human | Don't ask permission for reversible work. Do it, report it |
 | principle-outcome-oriented-execution | During a rewrite, converge on the target; don't polish intermediate states |
-| principle-migrate-callers-then-delete-legacy-apis | New API in, old API deleted — same wave, no compatibility shims |
+| principle-migrate-callers-then-delete-legacy-apis | New API in, old API deleted. Same wave, no compatibility shims |
 | principle-attack-the-premise | When two fixes sharing one assumption failed, test the assumption itself |
 | principle-exhaust-the-design-space | For novel decisions, build 2–3 prototypes and compare, don't commit blind |
 | principle-experience-first | When tradeoffs come up, pick user delight over implementation convenience |
@@ -194,8 +194,8 @@ Like mattpocock-skills, the session menu exposes a subset until configured.
 | blast-radius | What could this change break elsewhere? Prove the one fact it's safe because of |
 | benchmark-checklist | Vet a performance measurement before you believe or repeat it |
 | correct | Find the mistakes the agent keeps repeating here and make each one impossible |
-| how | "How does X work?" — architecture walkthrough, ownership and layering answers |
-| why | "Why is it this way?" — digs through git, issues, docs and chat for the rationale |
+| how | "How does X work?". Architecture walkthrough, ownership and layering answers |
+| why | "Why is it this way?". Digs through git, issues, docs and chat for the rationale |
 | teach | Explains a body of work plainly, weaving `how` + `why` together |
 | recall | Rebuild "what was I working on?" from history and live state into a short brief |
 | ketchup | Catch-up since your last message: what changed, what's waiting on you |
@@ -216,7 +216,7 @@ Like mattpocock-skills, the session menu exposes a subset until configured.
 | automate-me | Captures your working style into a personal "-mode" skill |
 | make-bot-ui | Builds a custom UI that wakes a Grok bot over a webhook (manual invocation) |
 
-## claude-mem — persistent memory and its automation on top
+## claude-mem, persistent memory and its automation on top
 
 Remembers past sessions and then automates the plan → build → verify → release
 loop around them. The memory core runs invisibly via hooks; these are the
@@ -235,7 +235,7 @@ skills you'd invoke.
 | make-plan | Detailed phased implementation plan from a feature idea |
 | do | Executes a plan with subagents, phase by phase |
 | build | Full pipeline: make-plan → do → babysit |
-| babysit | Watches a PR — comments, reviews, CI — until it's mergeable |
+| babysit | Watches PR comments, reviews and CI until it's mergeable |
 | childhood | Keeps watching a release *after* it ships until the observation window is clean |
 | handoff | Writes HANDOFF.md so a fresh session continues exactly here |
 | release | Automated release: version bump through publication |
@@ -248,14 +248,14 @@ skills you'd invoke.
 | pathfinder | Flowchart map of a codebase; spots duplicated systems, proposes one architecture |
 | oh-my-issues | Clusters a big issue backlog by root cause into plan-master issues |
 | design-is | Design audit against Dieter Rams' ten principles, ends in a plan |
-| what-the | "What the?" — plain-English who/what/where/why/when breakdown of anything technical |
+| what-the | "What the?". Plain-English who/what/where/why/when breakdown of anything technical |
 | wowerpoint | Turns one document into a kawaii slide deck |
 | ccs-align | Hourly health-and-alignment cycle for the local claude-mem worker (ops) |
 | backup-setup | Set up, check, or restore local claude-mem database snapshots |
 | owner-goals | Maps your own prompts into focus areas, asks, and rules in My Work |
 | request-progress | Groups conversations into requests with progress meters and velocity in My Work |
 
-## andrej-karpathy-skills — one skill
+## andrej-karpathy-skills, one skill
 
 | Skill | In plain words |
 |---|---|
@@ -267,7 +267,7 @@ skills you'd invoke.
 > **Deliberate overlaps exist.** `tdd`, `code-review`/`ponytail-review`,
 > `handoff`, `teach` and the grill family appear in more than one plugin.
 > Each agent loads every description into context, so every duplicate costs
-> tokens — see the [setup notes](../setup/agent-setup.md#toolbox).
+> tokens. See the [setup notes](../setup/agent-setup.md#toolbox).
 
 > [!TIP]
 > Skills that say "use when…" trigger automatically; the rest are

@@ -10,7 +10,7 @@
 
 This guide records a Windows setup used with Claude Code and Codex through a
 terminal or editor such as Zed. It separates repository files from user-installed
-tools. Reviewed **2026-10-22**; versions are a local snapshot, not requirements
+tools. Reviewed **2026-10-22**, updated **2026-10-31**; versions are a local snapshot, not requirements
 or a promise that both agents expose identical capabilities.
 
 ## Overview
@@ -59,15 +59,17 @@ directory does not install it for the other agent.
 The project debug skills have no dependency on Superpowers.
 
 > [!NOTE]
-> ECC was removed from the earlier setup after overlapping skills exhausted
-> the context budget and its hooks added work to routine sessions. Prefer
-> selected tools over stacking bundles with duplicate responsibilities.
+> Prefer selected tools over stacking bundles with duplicate responsibilities;
+> overlapping skills exhaust the context budget and hooks add work to routine
+> sessions. Removal history: [History](../history/README.md).
 
 ### Standalone skills
 
-The shared user store is `~/.agents/skills/`. Claude also has links or copies
-under `~/.claude/skills/`; inspect an entry before assuming it shares files
-with the store. Codex additionally has `~/.codex/skills/` in this setup.
+The shared user store is `~/.agents/skills/`. Claude links each store entry
+into `~/.claude/skills/` with NTFS junctions, so both paths serve the same
+files. Codex reads the store directly and keeps `~/.codex/skills/` only for
+its own system skills. Current entries are listed in the
+[Skills inventory](../reference/skills-inventory.md).
 
 | Skill | Role |
 |---|---|
@@ -75,24 +77,25 @@ with the store. Codex additionally has `~/.codex/skills/` in this setup.
 | `find-skills` | Discover suitable skills before adding another tool |
 | `git-workflow-and-versioning` | Organize changes, commits and versioning |
 | `github-ops` | GitHub issues, PRs and CI operations |
+| `hyperframes` trio | Make, edit and render video with HyperFrames |
 | `impeccable` | Frontend design and interface quality |
-| `karpathy-guidelines` | Focused implementation and explicit assumptions |
+| `media-use` | Music, images, voiceover and clips for videos |
+| `skill-creator` | Draft a new skill and evaluate its behavior |
 
 The Anthropic [skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator)
-is installed separately at both `~/.claude/skills/skill-creator/` and
-`~/.codex/skills/skill-creator/`. It helps draft skills and evaluate behavior.
-Codex also includes a system skill with that name; check the displayed
-description/path when choosing between them.
+lives in the shared store (`~/.agents/skills/skill-creator/`) and is linked
+into `~/.claude/skills/`; Codex reads the store's copy directly. It helps
+draft skills and evaluate behavior. Codex also includes a system skill with
+that name; check the displayed description/path when choosing between them.
 
-These user-scope installations are not vendored here. The three project skills
+These user-scope installations are not vendored here. The six project skills
 are listed in [Using the skills](../guides/using-the-skills.md).
 
 ### MCP tools
 
-The 2026-10-22 inspection found `codebase-memory-mcp`, `context7`, `firecrawl`
-and `playwright` declared for Codex; the current local config has those
-`[mcp_servers.*]` blocks commented out, leaving claude-mem's recall server as
-the only active Codex MCP source. Declaration does not establish server
+The Codex config keeps `codebase-memory-mcp`, `context7`, `firecrawl` and
+`playwright` commented out, so claude-mem's recall server is the only active
+Codex MCP source in this snapshot. Declaration does not establish server
 health, credentials or availability in every session.
 
 | Tool | Reach for it when |
